@@ -1,4 +1,9 @@
 [![Build Status](https://travis-ci.com/pulp-platform/riscv.svg?branch=master)](https://travis-ci.com/pulp-platform/riscv)
+# Lemurian Labs: Updates for Synthesis and CocoTB demo
+
+'''
+pytest -o log_cli=True tb/test_cv32e40p_vcs.py 
+'''
 
 # OpenHW Group CORE-V CV32E40P RISC-V IP
 

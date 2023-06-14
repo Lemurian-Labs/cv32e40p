@@ -1,3 +1,8 @@
+// synthesis translate_off
+`timescale 1ns/1ps
+// synthesis translate_on
+
+
 // Copyright 2020 Silicon Labs, Inc.
 //
 // This file, and derivatives thereof are licensed under the

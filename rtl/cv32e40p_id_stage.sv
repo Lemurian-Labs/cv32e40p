@@ -770,7 +770,7 @@ module cv32e40p_id_stage
   end
 
   generate
-    if (!COREV_PULP) begin
+    if (!COREV_PULP) begin: imm_vec_ext_inst
       assign imm_vec_ext_id = imm_vu_type[1:0];
     end else begin
       assign imm_vec_ext_id = (alu_vec) ? imm_vu_type[1:0] : 2'b0;

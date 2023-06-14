@@ -1,3 +1,8 @@
+// synthesis translate_off
+`timescale 1ns/1ps
+// synthesis translate_on
+
+
 // Copyright 2018 ETH Zurich and University of Bologna.
 // Copyright and related rights are licensed under the Solderpad Hardware
 // License, Version 0.51 (the "License"); you may not use this file except in

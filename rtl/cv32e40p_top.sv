@@ -1,3 +1,8 @@
+// synthesis translate_off
+`timescale 1ns/1ps
+// synthesis translate_on
+
+
 // Copyright 2018 ETH Zurich and University of Bologna.
 // Copyright and related rights are licensed under the Solderpad Hardware
 // License, Version 0.51 (the "License"); you may not use this file except in
@@ -22,6 +27,12 @@ module cv32e40p_top #(
 ) (
     // Clock and Reset
     input logic clk_i,
+    // //synthesis translate_off
+    // `ifdef COCOTB_SIM
+    // input logic 			  sample_clk,
+    // `endif 
+    // // synthesis translate_on
+
     input logic rst_ni,
 
     input logic pulp_clock_en_i,  // PULP clock enable (only used if COREV_CLUSTER = 1)

@@ -158,11 +158,18 @@ module cv32e40p_sleep_unit #(
   //     .clk_o       (clk_gated_o)
   // );
 
-  CKLNQD12BWP30P140 core_clock_gate_i (
-        .E (clock_en),
-        .CP (clk_ungated_i),
-        .TE (),
-        .Q (clk_gated_o));
+  // CKLNQD12BWP30P140 core_clock_gate_i (
+  //       .E (clock_en),
+  //       .CP (clk_ungated_i),
+  //       .TE (),
+  //       .Q (clk_gated_o));
+
+        clk_gate core_clock_gate_i (
+          .gated_clk(clk_gated_o), 
+          .free_clk(clk_ungated_i), 
+          .func_en(clock_en), 
+          .pwr_en(clock_en), 
+          .gating_override(clock_en));
   //----------------------------------------------------------------------------
   // Assertions
   //----------------------------------------------------------------------------
@@ -295,3 +302,12 @@ module cv32e40p_sleep_unit #(
 `endif
 
 endmodule  // cv32e40p_sleep_unit
+
+module clk_gate (output logic gated_clk, input logic free_clk, func_en, pwr_en, gating_override);
+   logic clk_en;
+   logic latched_clk_en  /*verilator clock_enable*/;
+   always_comb clk_en = func_en & (pwr_en | gating_override);
+   always_latch if (~free_clk) latched_clk_en <= clk_en;
+             // latched_clk_en <= (~free_clk) ? clk_en : latched_clk_en;
+   always_comb gated_clk = latched_clk_en & free_clk;
+endmodule

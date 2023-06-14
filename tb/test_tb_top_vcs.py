@@ -47,7 +47,7 @@ async def register_tb(dut):
     '''
     
     # Clock Generation 
-    clock = Clock(dut.clk_i, 10, units="ns") # create a clock for dut.clk pin with 10 ns period
+    clock = Clock(dut.clk, 10, units="ns") # create a clock for dut.clk pin with 10 ns period
     cocotb.start_soon(clock.start()) # start clock in a seperate thread
 
     #sample clock generation
@@ -56,7 +56,7 @@ async def register_tb(dut):
 
     # wavedrom trace, signals to be gathered from our DUT (Device Under Test)
     with cocotb.wavedrom.trace(
-        dut.clk_i,
+        dut.clk,
         clk=dut.sample_clk) as waves:
 
         # Example Test
@@ -106,19 +106,26 @@ print("simulator choice",simulator_choice)
 #Define test case parameter settings.
 # Add any new parameters here with a new line.
 # Then add the new parameter into the test_register arguments.
-@pytest.mark.parametrize("COREV_PULP"     , [0]  )
-@pytest.mark.parametrize("COREV_CLUSTER"     , [0]  )
-@pytest.mark.parametrize("FPU"     , [0]  )
-@pytest.mark.parametrize("FPU_ADDMUL_LAT"     , [0]  )
-@pytest.mark.parametrize("FPU_OTHERS_LAT"     , [0]  )
-@pytest.mark.parametrize("ZFINX"     , [0]  )
-@pytest.mark.parametrize("NUM_MHPMCOUNTERS"     , [1]  )
-def test_cv32e40p_top(COREV_PULP,COREV_CLUSTER,FPU,FPU_ADDMUL_LAT,FPU_OTHERS_LAT,ZFINX,NUM_MHPMCOUNTERS):
 
-    dut = 'cv32e40p_top' # Update the DUT to be the name of the module you want to test
+@pytest.mark.parametrize("INSTR_RDATA_WIDTH",[32])
+@pytest.mark.parametrize("RAM_ADDR_WIDTH", [22])
+@pytest.mark.parametrize("BOOT_ADDR",[384])
+@pytest.mark.parametrize("PULP_XPULP", [0])
+@pytest.mark.parametrize("PULP_CLUSTER", [0])
+@pytest.mark.parametrize("FPU", [0])
+# @pytest.mark.parametrize("FPU_ADDMUL_LAT", [0])
+# @pytest.mark.parametrize("FPU_OTHERS_LAT", [0])
+@pytest.mark.parametrize("ZFINX", [0])
+@pytest.mark.parametrize("NUM_MHPMCOUNTERS", [1])
+@pytest.mark.parametrize("DM_HALTADDRESS",[437323776])
+def test_cv32e40p_top(INSTR_RDATA_WIDTH,RAM_ADDR_WIDTH,BOOT_ADDR,PULP_XPULP,PULP_CLUSTER,FPU,
+#FPU_ADDMUL_LAT,FPU_OTHERS_LAT,
+ZFINX,NUM_MHPMCOUNTERS,DM_HALTADDRESS):
+
+    dut = 'tb_top' # Update the DUT to be the name of the module you want to test
 
     v_files = []
-    with open(sys.path[0]+"/../cv32e40p_top.vfs") as f: # Change to the name of your repo created from ip_template
+    with open(sys.path[0]+"/../tb_top.vfs") as f: # Change to the name of your repo created from ip_template
         myFile = f.read()
         v_files_pre = myFile.split(" ")
         for each in v_files_pre:

@@ -149,6 +149,8 @@ module tb_top #(
       .PULP_XPULP       (PULP_XPULP),
       .PULP_CLUSTER     (PULP_CLUSTER),
       .FPU              (FPU),
+      .FPU_ADDMUL_LAT   (0),
+      .FPU_OTHERS_LAT    (0),
       .ZFINX            (ZFINX),
       .NUM_MHPMCOUNTERS (NUM_MHPMCOUNTERS),
       .DM_HALTADDRESS   (DM_HALTADDRESS)

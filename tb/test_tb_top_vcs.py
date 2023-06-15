@@ -46,31 +46,36 @@ async def register_tb(dut):
         3. What should happen at the edge
     '''
     
-    # Clock Generation 
-    clock = Clock(dut.clk, 10, units="ns") # create a clock for dut.clk pin with 10 ns period
-    cocotb.start_soon(clock.start()) # start clock in a seperate thread
+    # # Clock Generation 
+    # clock = Clock(dut.clk, 10, units="ns") # create a clock for dut.clk pin with 10 ns period
+    # cocotb.start_soon(clock.start()) # start clock in a seperate thread
 
     #sample clock generation
-    sclock = Clock(dut.sample_clk, 5, units="ns") # create a clock for dut.sample_clk pin with 5 ns period
+    sclock = Clock(dut.sample_clk, 2.5, units="ns") # create a clock for dut.sample_clk pin with 5 ns period
     cocotb.start_soon(sclock.start()) # start clock in a seperate thread
 
     # wavedrom trace, signals to be gathered from our DUT (Device Under Test)
     with cocotb.wavedrom.trace(
         dut.clk,
+        dut.rst_n,
+        #dut.cycle_cnt_q,
+        dut.wrapper_i.instr_req, 
+        dut.wrapper_i.instr_gnt,
+        dut.wrapper_i.instr_rvalid,
+        dut.wrapper_i.instr_addr,
+        dut.wrapper_i.instr_rdata,
+        dut.wrapper_i.data_req,
         clk=dut.sample_clk) as waves:
 
         # Example Test
         # Assign random values to input, wait for a clock and verify output 
         for i in range(10): # 10 experiments
-        
-            exact = random.randint(0, 255) # generate randomized input
-            dut.data_rdata_i.value = exact # drive pins
             
-            await FallingEdge(dut.clk_i) # wait for falling edge
+            await FallingEdge(dut.clk) # wait for falling edge
             
-            computed = dut.data_wdata_o.value
+            rst_n = dut.rst_n.value
             # computed = dut.q.value.signed_integer # Read pins as signed integer.
-            
+            print(rst_n)
             #assert exact == computed, f"Failed on the {i}th cycle. Got {computed}, expected {exact}" # If any assertion fails, the test fails, and the string would be printed in console
             #print(f"Driven value: {exact} \t received value: {computed}") 
         
@@ -91,11 +96,11 @@ import platform
 
 # Choose the simulator (vcs only choice)
 simulator_choice = "vcs"
-simulator_args=["-full64", "-sverilog", "+lint=TFIPC-L", "+lint=PCWM", "-debug_access"]        
+simulator_args=["-full64", "-sverilog", "+fw=pathToHex", "+lint=TFIPC-L", "+lint=PCWM", "-debug_access", "+plusarg_sav", "+firmware=pathToHex"]        
 try:
     if "rhel" in platform.freedesktop_os_release()['ID']:
         simulator_choice = "vcs"
-        simulator_args=["-full64", "-sverilog", "+lint=TFIPC-L", "+lint=PCWM","-debug_access"]
+        # simulator_args=["-full64", "-sverilog", "+lint=TFIPC-L", "+lint=PCWM","-debug_access"]
 except:
     print("Unable to access distro information")
     # simulator_choice = "icarus"

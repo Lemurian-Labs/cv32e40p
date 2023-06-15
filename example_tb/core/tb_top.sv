@@ -23,6 +23,9 @@ module tb_top #(
     parameter ZFINX = 0,
     parameter NUM_MHPMCOUNTERS = 1,
     parameter DM_HALTADDRESS = 32'h1A110800
+)(
+  // Clock, reset interface
+  input  logic sample_clk
 );
 
   // comment to record execution trace
@@ -68,8 +71,10 @@ module tb_top #(
   // doesn't do more than an infinite loop with some I/O
   initial begin : load_prog
     automatic string firmware;
+    automatic string fs;
     automatic int prog_size = 6;
-
+    $value$plusargs("+fw=%s",fs);
+    $display("fw string %s",fs);
     if ($value$plusargs("firmware=%s", firmware)) begin
       if ($test$plusargs("verbose"))
         $display("[TESTBENCH] %t: loading firmware %0s ...", $time, firmware);
@@ -77,7 +82,7 @@ module tb_top #(
 
     end else begin
       $display("No firmware specified");
-      $finish;
+      //$finish;
     end
   end
 

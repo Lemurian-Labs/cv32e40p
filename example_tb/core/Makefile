@@ -64,8 +64,8 @@ RTLSRC_VLOG_TB_TOP	:= $(basename $(notdir $(RTLSRC_TB_TOP)))
 RTLSRC_VOPT_TB_TOP	:= $(addsuffix _vopt, $(RTLSRC_VLOG_TB_TOP))
 
 # riscv toolchain install path
-RISCV                    ?= ~/.riscv
-RISCV_EXE_PREFIX         = $(RISCV)/bin/riscv32-unknown-elf-
+RISCV                    ?= /opt/riscv
+RISCV_EXE_PREFIX         = $(RISCV)/bin/riscv32-corev-elf-
 
 # assume vsim if no target chosen
 .DEFAULT_GOAL := custom-vsim-run

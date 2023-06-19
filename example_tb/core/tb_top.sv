@@ -81,7 +81,8 @@ module tb_top #(
       $readmemh(firmware, wrapper_i.ram_i.dp_ram_i.mem);
 
     end else begin
-      $display("No firmware specified");
+      $display("No firmware specified, going with a hard coded option.");
+      $readmemh("/Data/home/carrie/git/Synthesis-DCRM/Designs/cv32e40p/example_tb/core/custom/sp.hex", wrapper_i.ram_i.dp_ram_i.mem);
       //$finish;
     end
   end

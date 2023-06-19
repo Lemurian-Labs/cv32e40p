@@ -69,7 +69,7 @@ async def register_tb(dut):
 
         # Example Test
         # Assign random values to input, wait for a clock and verify output 
-        for i in range(10): # 10 experiments
+        for i in range(30): # 10 experiments
             
             await FallingEdge(dut.clk) # wait for falling edge
             
@@ -96,7 +96,7 @@ import platform
 
 # Choose the simulator (vcs only choice)
 simulator_choice = "vcs"
-simulator_args=["-full64", "-sverilog", "+fw=pathToHex", "+lint=TFIPC-L", "+lint=PCWM", "-debug_access", "+plusarg_sav", "+firmware=pathToHex"]        
+simulator_args=["-full64", "-sverilog", "+fw=pathToHex", "+lint=TFIPC-L", "+lint=PCWM", "-debug_access", "+firmware=pathToHex"]        
 try:
     if "rhel" in platform.freedesktop_os_release()['ID']:
         simulator_choice = "vcs"

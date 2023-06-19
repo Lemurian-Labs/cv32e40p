@@ -18,3 +18,10 @@ TAGS
 /build
 /Bender.lock
 /Bender.local
+WORK/
+alib-52/
+*.ndm/
+reports/
+results/
+sim_build/
+tb/__pycache__/

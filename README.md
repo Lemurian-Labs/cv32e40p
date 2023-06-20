@@ -5,6 +5,11 @@
 pytest -o log_cli=True tb/test_cv32e40p_vcs.py 
 '''
 
+Compile an example program 
+'''
+cd example_tb/core/;/opt/riscv/bin/riscv32-corev-elf-gcc -march=rv32i_zicsr -o custom/incrementer.elf -w -Os -g -nostdlib -T custom/link.ld custom/incrementer.c -I /opt/riscv/riscv32-corev-elf/include/ -L /opt/riscv/riscv32-corev-elf/lib -lc -lm -lgcc; make custom/incrementer.hex custom/incrementer.elf cd ../..
+'''
+
 # OpenHW Group CORE-V CV32E40P RISC-V IP
 
 CV32E40P is a small and efficient, 32-bit, in-order RISC-V core with a 4-stage pipeline that implements

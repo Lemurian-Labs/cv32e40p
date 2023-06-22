@@ -68,7 +68,7 @@ async def register_tb(dut):
         dut.wrapper_i.top_i.core_i.ex_stage_i.alu_operand_a_i,
         dut.wrapper_i.top_i.core_i.ex_stage_i.alu_operand_b_i,
         dut.wrapper_i.top_i.core_i.ex_stage_i.alu_operand_c_i,
-        dut.wrapper_i.top_i.core_i.cs_registers_i.mscratch_n,
+        dut.wrapper_i.top_i.core_i.cs_registers_i.dscratch0_q,
         dut.wrapper_i.top_i.core_i.cs_registers_i.mscratch_q,
         clk=dut.sample_clk) as waves:
 

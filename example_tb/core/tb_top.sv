@@ -177,4 +177,17 @@ module tb_top #(
   end
 `endif
 
+  //synthesis translate_off
+  `ifdef COCOTB_SIM
+  initial 
+  begin
+ $fsdbDumpfile("tb_top.fsdb");
+ $fsdbDumpvars(0, tb_top);
+ $fsdbDumpMDA(tb_top);
+
+
+  end
+`endif 
+// synthesis translate_on	
+
 endmodule  // tb_top

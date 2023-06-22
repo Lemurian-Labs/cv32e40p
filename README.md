@@ -1,14 +1,14 @@
 [![Build Status](https://travis-ci.com/pulp-platform/riscv.svg?branch=master)](https://travis-ci.com/pulp-platform/riscv)
 # Lemurian Labs: Updates for Synthesis and CocoTB demo
 
-'''
+```
 pytest -o log_cli=True tb/test_cv32e40p_vcs.py 
-'''
+```
 
 Compile an example program 
-'''
-cd example_tb/core/;/opt/riscv/bin/riscv32-corev-elf-gcc -march=rv32i_zicsr -o custom/incrementer.elf -w -Os -g -nostdlib -T custom/link.ld custom/incrementer.c -I /opt/riscv/riscv32-corev-elf/include/ -L /opt/riscv/riscv32-corev-elf/lib -lc -lm -lgcc; make custom/incrementer.hex custom/incrementer.elf cd ../..
-'''
+```
+cd example_tb/core/;/opt/riscv/bin/riscv32-corev-elf-gcc -march=rv32i_zicsr -o custom/incrementer.elf -w -Os -g -nostdlib -T custom/link.ld custom/incrementer.c -I /opt/riscv/riscv32-corev-elf/include/ -L /opt/riscv/riscv32-corev-elf/lib -lc -lm -lgcc; make custom/incrementer.hex custom/incrementer.elf; cd ../..
+```
 
 # OpenHW Group CORE-V CV32E40P RISC-V IP
 

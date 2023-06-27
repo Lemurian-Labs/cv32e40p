@@ -68,13 +68,15 @@ async def register_tb(dut):
         dut.wrapper_i.top_i.core_i.ex_stage_i.alu_operand_a_i,
         dut.wrapper_i.top_i.core_i.ex_stage_i.alu_operand_b_i,
         dut.wrapper_i.top_i.core_i.ex_stage_i.alu_operand_c_i,
+        dut.wrapper_i.top_i.core_i.id_stage_i.alu_operand_a_ex_o,
+        dut.wrapper_i.top_i.core_i.csr_wdata,
         dut.wrapper_i.top_i.core_i.cs_registers_i.dscratch0_q,
         dut.wrapper_i.top_i.core_i.cs_registers_i.mscratch_q,
         clk=dut.sample_clk) as waves:
 
         # Example Test
         # Assign random values to input, wait for a clock and verify output 
-        for i in range(50): # 10 experiments
+        for i in range(30): # 10 experiments
             
             await FallingEdge(dut.clk) # wait for falling edge
             

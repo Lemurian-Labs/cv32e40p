@@ -24,14 +24,19 @@ module cv32e40p_tb_subsystem #(
     parameter NUM_MHPMCOUNTERS = 1,
     parameter DM_HALTADDRESS = 32'h1A110800
 ) (
-    input logic clk_i,
-    input logic rst_ni,
+    input logic 	clk_i,
+    input logic 	rst_ni,
 
-    input  logic        fetch_enable_i,
-    output logic        tests_passed_o,
-    output logic        tests_failed_o,
+    input logic 	fetch_enable_i,
+    output logic 	tests_passed_o,
+    output logic 	tests_failed_o,
     output logic [31:0] exit_value_o,
-    output logic        exit_valid_o
+    output logic 	exit_valid_o,
+
+   // akaul
+    output logic [31:0] csr_wdata,
+    output logic 	csr_access_ex
+   // akaul   
 );
 
   // signals connecting core to memory
@@ -116,7 +121,11 @@ module cv32e40p_tb_subsystem #(
       .debug_halted_o   (),
 
       .fetch_enable_i(fetch_enable_i),
-      .core_sleep_o  (core_sleep_o)
+      .core_sleep_o  (core_sleep_o),
+      // akaul
+      .csr_wdata     (csr_wdata),
+      .csr_access_ex (csr_access_ex)
+      // akaul	   
   );
 
 

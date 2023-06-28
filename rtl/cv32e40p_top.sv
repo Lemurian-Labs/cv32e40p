@@ -75,7 +75,12 @@ module cv32e40p_top #(
 
     // CPU Control Signals
     input  logic fetch_enable_i,
-    output logic core_sleep_o
+    output logic core_sleep_o,
+
+   // akaul
+   output logic [31:0] csr_wdata,
+   output logic csr_access_ex
+   // akaul   
 );
 
   import cv32e40p_apu_core_pkg::*;
@@ -149,7 +154,11 @@ module cv32e40p_top #(
       .debug_halted_o   (debug_halted_o),
 
       .fetch_enable_i(fetch_enable_i),
-      .core_sleep_o  (core_sleep_o)
+      .core_sleep_o  (core_sleep_o),
+      // akaul
+      .csr_wdata     (csr_wdata),
+      .csr_access_ex (csr_access_ex)
+      // akaul	    
   );
 
   generate

@@ -96,7 +96,11 @@ module cv32e40p_core
 
     // CPU Control Signals
     input  logic fetch_enable_i,
-    output logic core_sleep_o
+    output logic core_sleep_o,
+
+   // akaul
+   output logic [31:0] csr_wdata,
+   output logic csr_access_ex
 );
 
   import cv32e40p_pkg::*;
@@ -237,7 +241,7 @@ module cv32e40p_core
   logic        [                31:0]       regfile_alu_wdata_fw;
 
   // CSR control
-  logic                                     csr_access_ex;
+// akaul  logic                                     csr_access_ex;
   csr_opcode_e                              csr_op_ex;
   logic [23:0] mtvec, utvec;
   logic        [ 1:0] mtvec_mode;
@@ -247,7 +251,7 @@ module cv32e40p_core
   csr_num_e           csr_addr;
   csr_num_e           csr_addr_int;
   logic        [31:0] csr_rdata;
-  logic        [31:0] csr_wdata;
+// akaul  logic        [31:0] csr_wdata;
   PrivLvl_t           current_priv_lvl;
 
   // Data Memory Control:  From ID stage (id-ex pipe) <--> load store unit

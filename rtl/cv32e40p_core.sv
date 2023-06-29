@@ -100,7 +100,7 @@ module cv32e40p_core
 
    // akaul
    output logic [31:0] csr_wdata,
-   output logic csr_access_ex
+   output logic alu_en_ex
 );
 
   import cv32e40p_pkg::*;
@@ -171,7 +171,7 @@ module cv32e40p_core
   logic        [31:0] pc_ex;  // PC of last executed branch or cv.elw
 
   // ALU Control
-  logic               alu_en_ex;
+// akaul  logic               alu_en_ex;
   alu_opcode_e        alu_operator_ex;
   logic        [31:0] alu_operand_a_ex;
   logic        [31:0] alu_operand_b_ex;
@@ -241,7 +241,7 @@ module cv32e40p_core
   logic        [                31:0]       regfile_alu_wdata_fw;
 
   // CSR control
-// akaul  logic                                     csr_access_ex;
+  logic                                     csr_access_ex;
   csr_opcode_e                              csr_op_ex;
   logic [23:0] mtvec, utvec;
   logic        [ 1:0] mtvec_mode;

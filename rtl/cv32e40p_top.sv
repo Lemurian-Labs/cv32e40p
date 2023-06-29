@@ -79,7 +79,7 @@ module cv32e40p_top #(
 
    // akaul
    output logic [31:0] csr_wdata,
-   output logic csr_access_ex
+   output logic alu_en_ex
    // akaul   
 );
 
@@ -157,7 +157,7 @@ module cv32e40p_top #(
       .core_sleep_o  (core_sleep_o),
       // akaul
       .csr_wdata     (csr_wdata),
-      .csr_access_ex (csr_access_ex)
+      .alu_en_ex     (alu_en_ex)
       // akaul	    
   );
 

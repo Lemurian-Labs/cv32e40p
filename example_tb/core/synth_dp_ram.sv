@@ -17,7 +17,9 @@ module synth_dp_ram #(
 			 input logic [3:0] 		      be_b
 			 );
 
-  localparam bytes = 2 ** ADDR_WIDTH;
+  // akaul
+  //localparam bytes = 2 ** ADDR_WIDTH;
+  localparam bytes = 2 ** 8;
 
   logic [           7:0] mem [bytes];
   logic [ADDR_WIDTH-1:0] addr_a_int;
